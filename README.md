@@ -1,5 +1,5 @@
 # HttpConsole
-A light and simple http console to admin you website  
+A light and simple http console to admin your website  
  
 Hello and welcome to Http Console!   
    
