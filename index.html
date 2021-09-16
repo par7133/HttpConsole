@@ -1,0 +1,115 @@
+ 
+
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	
+  <meta charset="UTF-8"/>
+  <meta name="style" content="day1"/>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  
+<!--
+Copyright (c) 2016, 2024, 5 Mode
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+  * Neither 5 Mode nor the names of its contributors 
+    may be used to endorse or promote products derived from this software 
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+https://opensource.org/licenses/BSD-3-Clause -->
+  
+    
+  <title>Http Console</title>
+	
+  <link rel="shortcut icon" href="HCres/favicon.ico" />
+    
+  <meta name="description" content="Welcome to Http Console"/>
+  <meta name="author" content="5 Mode"/> 
+  <meta name="robots" content="noindex"/>
+  
+  <script src="HCjs/jquery-3.1.0.min.js" type="text/javascript"></script>
+  <script src="HCjs/jquery-ui.1.12.1.min.js" type="text/javascript"></script>
+  <script src="HCjs/HC_common.js" type="text/javascript"></script>
+  <script src="HCjs/bootstrap.min.js" type="text/javascript"></script>
+  <script src="HCjs/sha.js" type="text/javascript"></script>
+  
+  <script src="HCjs/HC.js" type="text/javascript" defer></script>
+  
+  <link href="HCcss/bootstrap.min.css" type="text/css" rel="stylesheet">
+  <link href="HCcss/jquery-ui.1.12.1.css" type="text/css" rel="stylesheet">
+  <link href="HCcss/style.css?v=1631827555" type="text/css" rel="stylesheet">
+         
+</head>
+<body>
+
+<div class="header">
+   <a href="/" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
+</div>
+	
+<div style="clear:both; float:left; padding:8px; width:15%; height:100%;">
+	&nbsp;Download<br>
+	&nbsp;<a href="">Release 0.5.0</a>
+    <br><br><br><br><br><br><br>
+</div>
+
+<div style="float:left; width:85%;height:100%; padding:8px; border-left: 1px solid #2c2f34;">
+	
+	   <div id="FirstBanner" style="border-radius:20px; position:relative; left:+3px; width:98%; background-color: #33aced; padding: 20px; margin-bottom:8px;">	
+	
+	   <button type="button" class="close" aria-label="Close" onclick="" style="position:relative; left:-10px;">
+          <span aria-hidden="true">&times;</span>
+       </button>
+	
+	   Hello and welcome to Http Console!<br><br>
+	   
+	   Http Console is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
+	   
+	   First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.<br><br>
+	   
+	   As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, we reccomend you to follow some simple directives for an optimal first setup:<br>
+	   <ol>
+	   <li>We encourage you to setup a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file as *cd depth*.</li>
+	   <li>Inside the stage path create a "sample" folder and give to this folder the write permission. This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.</li>
+	   <li>Likewise create an "upload" folder inside the stage path giving the right permissions.</li>
+	   <li>Configure the max history items and max recall history items as required (default: 50).</li>	      
+	   </ol>
+	   
+	   <br>	
+	   
+	   Http Console understands a limited set of commands with a far limited set of parameters:<br>
+	   cd, cd.., cp, cp -R, ls, ls -lsa, mkdir, mv, pwd<br><br>	   
+	   
+	   Hope you can enjoy it and let us know about any feedback: <a href="mailto:info@httpconsole.com" style="color:#e6d236;">info@httpconsole.com</a>
+	   
+	</div>	
+	
+</div>
+
+<div class="footer">
+<div id="footerCont">&nbsp;</div>
+<div id="footer"><span style="background:#FFFFFF;opacity:1.0;">&nbsp;&nbsp;A <a id="linkOpenGallery" href="http://5mode.com" style="cursor: poin
+ter;">5 Mode</a> project. Some rights reserved.</span></div>	
+</div>
+
+</body>	 
+</html>	 
+
