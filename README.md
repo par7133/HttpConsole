@@ -11,8 +11,7 @@ Remember to manually set there also the salt value.
 As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, 
 we reccomend you to follow some simple directives for an optimal first setup:   
  
-1. We encourage you to setup a "stage" folder in your web app path; give to the stage folder the write permissions;   
-and set the stage path in the config file as *cd depth*.</li>
+1. We encourage you to setup a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file as *cd depth*.
 2. Inside the stage path create a "sample" folder and give to this folder the write permission.  
 This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.  
 3. Likewise create an "upload" folder inside the stage path giving the right permissions.  
