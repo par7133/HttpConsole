@@ -2,7 +2,7 @@
 
 Hello and welcome to Http Console!   
    
-Http Console is a light and simple web console to admin your website.     
+Http Console is a light and simple web console to manage your website.     
    
 Http Console is supplied AS-IS and we do not take any responsibility for its misusage.    
    
