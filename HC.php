@@ -550,7 +550,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="/hc" target="_self">
+<form id="frmHC" method="POST" action="HC.php" target="_self">
 
 <div class="header">
    <a href="/" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
