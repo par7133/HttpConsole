@@ -17,7 +17,7 @@ you must follow some simple directives for an optimal first setup:
 4. Configure the max history items and max recall history items as required (default: 50).        
   
 Http Console understands a limited set of commands with a far limited set of parameters:  
-cd, cd.., cp, cp -R, ls, ls -lsa, mkdir, mv, pwd  	   
+cd, cd.., cp, cp -R, ls, ls -lsa, mv, pwd  	   
   
 Hope you can enjoy it and let us know about any feedback: info@httpconsole.com   
 	   
