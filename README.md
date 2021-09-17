@@ -6,8 +6,7 @@ Http Console is a light and simple web console to admin your website.
    
 Http Console is supplied AS-IS and we do not take any responsibility for its misusage.    
    
-First step, use the left side panel password and salt fields to create the hash to insert in the config file.   
-Remember to manually set there also the salt value.   
+First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.   
    
 As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, 
 we reccomend you to follow some simple directives for an optimal first setup:   
