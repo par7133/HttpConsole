@@ -502,9 +502,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 https://opensource.org/licenses/BSD-3-Clause -->
   
     
-  <title><?php echo(HC_APP_NAME); ?></title>
+  <title>Http Console: Ubiquity c'est la vie..</title>
 	
-  <link rel="shortcut icon" href="HCres/favicon.ico?v=<?php echo(time()); ?>" />
+  <link rel="shortcut icon" href="./HCres/favicon55.ico?v=<?php echo(time()); ?>" />
     
   <meta name="description" content="Welcome to <?php echo(HC_APP_NAME); ?>"/>
   <meta name="author" content="5 Mode"/> 
@@ -550,7 +550,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self">
+<form id="frmHC" method="POST" action="/hc" target="_self">
 
 <div class="header">
    <a href="/" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
@@ -560,10 +560,10 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	&nbsp;Upload
     <br><br><br><br><br><br><br>
     &nbsp;Password<br>
-    &nbsp;<input type="text" id="Password" name="Password" style="font-size:10px; color:black; width: 90%" value="<?php echo($password);?>"><br>
+    &nbsp;<input type="text" id="Password" name="Password" style="font-size:10px; color:black; width: 90%; border-radius:3px;" value="<?php echo($password);?>"><br>
     &nbsp;Salt<br>
-    &nbsp;<input type="text" id="Salt" style="font-size:10px; color:black; width: 90%" autocomplete="off"><br>
-    &nbsp;<input type="button" id="Encode" value="Hash Me!" onclick="showEncodedPassword();" style="width:90%; color:black;">
+    &nbsp;<input type="text" id="Salt" style="font-size:10px; color:black; width: 90%; border-radius:3px;" autocomplete="off"><br><br>
+    &nbsp;<input type="button" id="Encode" value="Hash Me!" onclick="showEncodedPassword();" style="position:relative;left:-2px; width:92%; color:black; border-radius:2px;">
 </div>
 
 <div style="float:left; width:85%;height:100%; padding:8px; border-left: 1px solid #2c2f34;">
@@ -576,6 +576,8 @@ https://opensource.org/licenses/BSD-3-Clause -->
        </button>
 	
 	   Hello and welcome to Http Console!<br><br>
+	   
+	   Http Console is a light and simple web console to admin your website.<br><br>
 	   
 	   Http Console is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
 	   
@@ -618,8 +620,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 
 <div class="footer">
 <div id="footerCont">&nbsp;</div>
-<div id="footer"><span style="background:#FFFFFF;opacity:1.0;">&nbsp;&nbsp;A <a id="linkOpenGallery" href="http://5mode.com" style="cursor: poin
-ter;">5 Mode</a> project. Some rights reserved.</span></div>	
+<div id="footer"><span style="background:#FFFFFF;opacity:1.0;margin-right:10px;">&nbsp;&nbsp;A <a href="http://5mode.com">5 Mode</a> project and <a href="http://wysiwyg.systems">WYSIWYG</a> system. Some rights reserved.</span></div>	
 </div>
 
 <input type="hidden" name="pwd" value="<?php echo($curPath); ?>" style="color:black">
