@@ -12,8 +12,7 @@ As you are going to make work Http Console in the PHP process environment, using
 you must follow some simple directives for an optimal first setup:   
  
 1. Setup a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file.
-2. Inside the stage path create a "sample" folder and give to this folder the write permission.  
-This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.  
+2. Inside the stage path create a "sample" folder and give to this folder the write permission. This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.  
 3. Likewise create an "upload" folder inside the stage path giving the right permissions.  
 4. Configure the max history items and max recall history items as required (default: 50).        
   
