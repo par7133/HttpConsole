@@ -35,31 +35,42 @@
  * @license https://opensource.org/licenses/BSD-3-Clause 
  */
  
-  /**
-   * Encode any HTML of a given string
-   * 
-   * @param string $s the string to encode
-   * @param bool $withBR keep the BR tag, true/false
-   * @return string the string encoded
-   */
-  function HTMLencode(?string $s, bool $withBR = false): string 
-  {
-    if (!isset($s)) {
-      return HC_STR;
-    }
+ 
+ function getVirtualPath(string $path): string 
+ {
+	$ret = HC_STR; 
+	if (left($path, strlen(HC_WEBSITE_WEBROOT)) === HC_WEBSITE_WEBROOT) {
+	   $ret = substr($path, strlen(HC_WEBSITE_WEBROOT));	
+	}	
+	return $ret;
+ } 
+ 
+ /**
+  * Encode any HTML of a given string
+  * 
+  * @param string $s the string to encode
+  * @param bool $withBR keep the BR tag, true/false
+  * @return string the string encoded
+  */
+ function HTMLencode(?string $s, bool $withBR = false): string 
+ {
+   if (!isset($s)) {
+     return HC_STR;
+   }
     
-    $s = str_ireplace("&#39;", "'", $s); 
-    $s = str_ireplace("&#34;", "\"", $s);
-    $s = str_ireplace("\\n", chr(10), $s);
-    $s = htmlspecialchars($s, ENT_QUOTES |ENT_IGNORE | ENT_HTML5, "UTF-8");
+   $s = str_ireplace("&#39;", "'", $s); 
+   $s = str_ireplace("&#34;", "\"", $s);
+   $s = str_ireplace("\\n", chr(10), $s);
+   $s = htmlspecialchars($s, ENT_QUOTES |ENT_IGNORE | ENT_HTML5, "UTF-8");
     
-    if ($withBR) {
-      $s = str_ireplace(chr(10), HC_BR, $s);
-    }  
+   if ($withBR) {
+     $s = str_ireplace(chr(10), HC_BR, $s);
+   }  
     
-    return $s;
-  } 
+   return $s;
+ } 
 
+if (!function_exists("left")) { 
 /**
  * Left cut the given substring for the specified length 
  * 
@@ -74,7 +85,9 @@ function left(?string $string, int $length): string
   }
   return mb_substr($string, 0, $length);
 }
+}
 
+if (!function_exists("right")) {
 /**
  * Right cut the given string for the specified length 
  * 
@@ -89,3 +102,5 @@ function right(?string $string, int $length): string
   }  
   return mb_substr($string, mb_strlen($string) - $length);
 }
+}
+

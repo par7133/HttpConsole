@@ -50,7 +50,7 @@
    global $cmdHistory;
    $i = 1;	 
    foreach($cmdHistory as $val) {
-	 echo(HTMLencode($val));
+	 echo(str_replace("\n", "<br>", $val));
 	 $i++;   
    }
  }
@@ -170,6 +170,14 @@ function updateHistory(&$update, $maxItems) {
    $curPath = $newPath;
    $curDir = $param1;
  
+   // Creating the Download folder if doesn't exist..
+   $downloadPath = $curPath . HC_SLASH . ".HCdownloads";
+   if (!file_exists($downloadPath)) {
+	 //copy(HC_APP_STAGE_PATH . HC_SLASH . ".HCsampledir", $downloadPath);  
+     $mycmd = "cp -Rp " . HC_APP_STAGE_PATH . HC_SLASH . ".HCsampledir" . " " . $downloadPath;
+     $myret = exec($mycmd);
+   }
+ 
    $prompt = str_replace("$1", $curDir, HC_APP_PROMPT);
 
    // Update history..
@@ -212,7 +220,65 @@ function updateHistory(&$update, $maxItems) {
    updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
    updateHistory($output, HC_HISTORY_MAX_ITEMS);
  }
+
+ function myExecLSCommand() {
+   global $prompt;
+   global $command;
+   global $curPath;
  
+   $downloadPath = $curPath . HC_SLASH . ".HCdownloads";
+ 
+    // Exec command..
+   $output = [];
+   $output[] = $prompt . " " . $command . "\n";   
+   exec($command, $output);
+   
+   // Creating the Download path for the current folder..
+   if (!file_exists($downloadPath)) {
+     //copy(HC_APP_STAGE_PATH . HC_SLASH . ".HCsampledir", $downloadPath);
+     $mycmd = "cp -Rp " . HC_APP_STAGE_PATH . HC_SLASH . ".HCsampledir" . " " . $downloadPath;
+     $myret=exec($mycmd);
+   }
+   
+   // Cleaning the Download folder..
+   if (file_exists($downloadPath)) {
+	   $files1 = scandir($downloadPath);
+	   foreach($files1 as $file) {
+		 if (!is_dir($downloadPath . HC_SLASH . $file) && $file !== "." && $file !== "..") {
+		   unlink($downloadPath . HC_SLASH . $file);
+		 }	     
+	   }
+   }
+      
+   // Update history..
+   foreach ($output as &$val) {
+	 if ($val === $prompt . " " . $command . "\n") {
+     } else {	   
+	   if (right($val,1)==="\n") {
+	     $val = left($val, strlen($val)-1);
+	   }  
+	   
+	   // Creating the tmp download for the file entry and generating the virtual path..
+	   $virtualPath = HC_STR;
+	   if (file_exists($downloadPath)) {
+		 if (!is_dir($curPath . HC_SLASH . $val) && filesize($curPath . HC_SLASH . $val)<=651000) {
+		   copy($curPath . HC_SLASH . $val, $downloadPath . HC_SLASH . $val . ".hcd");  
+		   $virtualPath = getVirtualPath($downloadPath . HC_SLASH . $val . ".hcd");
+		 }
+	   } else {
+		 $virtualPath=HC_STR;
+	   }      
+	   if ($virtualPath!==HC_STR) {
+	     $val = "<a href='$virtualPath'>" . $val . "</a>\n";   	     
+	   } else {
+		 $val = $val . "\n";
+	   }
+	 }      	         
+   }	 
+   updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
+   updateHistory($output, HC_HISTORY_MAX_ITEMS);
+ }
+
  function parseCommand() {
    global $command;
    global $cmd;
@@ -395,9 +461,9 @@ function updateHistory(&$update, $maxItems) {
     }	 
  } 
  
- $curPath = HC_CMDLINE_CD_DEPTH;
+ $curPath = HC_APP_STAGE_PATH;
  if ($pwd!==HC_STR) {
-   if (left($pwd, strlen(HC_CMDLINE_CD_DEPTH)) === HC_CMDLINE_CD_DEPTH) {
+   if (left($pwd, strlen(HC_APP_STAGE_PATH)) === HC_APP_STAGE_PATH) {
      $curPath = $pwd;
      chdir($curPath);	   
    }	    
@@ -425,11 +491,15 @@ function updateHistory(&$update, $maxItems) {
 	   $ipos = strripos($curPath, HC_SLASH);
 	   $nextPath = substr($curPath, 0, $ipos);
 	   
-	   if (strlen(HC_CMDLINE_CD_DEPTH) > strlen($nextPath)) {
+	   if (strlen(HC_APP_STAGE_PATH) > strlen($nextPath)) {
          updateHistoryWithErr("out of root boundary");
        } else {
 		 myExecCDBackwCommand();
 	   }	
+	
+	 } else if ($command === "ls") {
+		 
+	   myExecLSCommand();	 
 	      
      } else {
 	   myExecCommand(); 
@@ -550,20 +620,27 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self">
+<form id="frmHC" method="POST" action="/hc" target="_self">
 
 <div class="header">
    <a href="/" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
 </div>
 	
-<div style="clear:both; float:left; padding:8px; width:15%; height:100%;">
-	&nbsp;Upload
+<div style="clear:both; float:left; padding:8px; width:15%; height:100%; text-align:center;">
+	<div style="padding-left:12px;text-align: left;">
+	  &nbsp;Upload
+	</div>
     <br><br><br><br><br><br><br>
-    &nbsp;Password<br>
+<!-- &nbsp;Password<br>
     &nbsp;<input type="text" id="Password" name="Password" style="font-size:10px; color:black; width: 90%; border-radius:3px;" value="<?php echo($password);?>"><br>
     &nbsp;Salt<br>
     &nbsp;<input type="text" id="Salt" style="font-size:10px; color:black; width: 90%; border-radius:3px;" autocomplete="off"><br><br>
-    &nbsp;<input type="button" id="Encode" value="Hash Me!" onclick="showEncodedPassword();" style="position:relative;left:-2px; width:92%; color:black; border-radius:2px;">
+    &nbsp;<input type="button" id="Encode" value="Hash Me!" onclick="showEncodedPassword();" style="position:relative;left:-2px; width:92%; color:black; border-radius:2px;"> -->
+  
+    &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" value="<?php echo($password);?>" autocomplete="off"><br>
+    &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" autocomplete="off"><br>
+    &nbsp;<a href="#" onclick="showEncodedPassword();" style="position:relative; left:-2px; top:+5px; color:#ffffff; font-size:12px;">Hash Me!</a>
+     
 </div>
 
 <div style="float:left; width:85%;height:100%; padding:8px; border-left: 1px solid #2c2f34;">
@@ -577,16 +654,16 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	
 	   Hello and welcome to Http Console!<br><br>
 	   
-	   Http Console is a light and simple web console to admin your website.<br><br>
+	   Http Console is a light and simple web console to manage your website.<br><br>
 	   
 	   Http Console is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
 	   
 	   First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.<br><br>
 	   
-	   As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, we reccomend you to follow some simple directives for an optimal first setup:<br>
+	   As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, you must follow some simple directives for an optimal first setup:<br>
 	   <ol>
-	   <li>We encourage you to setup a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file as *cd depth*.</li>
-	   <li>Inside the stage path create a "sample" folder and give to this folder the write permission. This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.</li>
+	   <li>Create a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file.</li>
+	   <li>Inside the stage path create a ".HCsampledir" folder and give to this folder the write permission. This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.</li>
 	   <li>Likewise create an "upload" folder inside the stage path giving the right permissions.</li>
 	   <li>Configure the max history items and max recall history items as required (default: 50).</li>	      
 	   </ol>
@@ -594,7 +671,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	   <br>	
 	   
 	   Http Console understands a limited set of commands with a far limited set of parameters:<br>
-	   cd, cd.., cp, cp -R, ls, ls -lsa, mkdir, mv, pwd<br><br>	   
+	   cd, cd.., cp, cp -R, ls, ls -lsa, mv, pwd<br><br>	   
 	   
 	   Hope you can enjoy it and let us know about any feedback: <a href="mailto:info@httpconsole.com" style="color:#e6d236;">info@httpconsole.com</a>
 	   
@@ -602,7 +679,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	<?php endif; ?>
 	
 	&nbsp;Console<br>
-	<div id="Console" style="height:500px; overflow-y:auto; margin-top:10px;">
+	<div id="Console" style="height:493px; overflow-y:auto; margin-top:10px;">
 	<pre style="margin-left:5px;padding-left:0px;border:0px;background-color: #000000; color: #ffffff;">
 <?php showHistory($cmdHistory); ?>		
 <div style="position:relative;top:-15px;"><label id="Prompt" for="CommandLine"><?php echo($prompt); ?></label>&nbsp;<input id="CommandLine" name="CommandLine" list="CommandList" type="text" autocomplete="off" style="width:80%; height:22px; background-color: black; color:white; border:0px; border-bottom: 1px dashed #EEEEEE;"></div>	

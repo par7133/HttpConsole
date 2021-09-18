@@ -46,13 +46,15 @@ define('HC_APP_HASH', "");
 define('HC_APP_PATH', "/var/www/YourWebApp/Private/HttpConsole");
 define('HC_APP_PROMPT', "HC:~ $1$");
 define('HC_APP_SALT', "yoursalt");
+define('HC_APP_STAGE_PATH', "/var/www/YourWebApp/Public/stage");
 
 define('HC_CMDLINE_VALIDCMDS', "~|ls|ls -lsa|pwd|cd|cd ..|cp|mv|");
-define('HC_CMDLINE_CD_DEPTH', "/var/www/YourWebApp/Public/stage");
 
 define('HC_HISTORY_MAX_ITEMS', 50);
 
 define('HC_RECALL_HISTORY_MAX_ITEMS', 50);
+
+define('HC_WEBSITE_WEBROOT', "/var/www/YourWebApp/Public");
 
 $HC_CONFIG = [
 
@@ -63,12 +65,12 @@ $HC_CONFIG = [
       'HASH' => "",  
       'PATH' => "/var/www/YourWebApp/Private/HttpConsole",
       'PROMPT' => "HC:~ $1$",
-      'SALT' => "yoursalt"
+      'SALT' => "yoursalt",
+      'STAGE_PATH' => "/var/www/YourWebApp/Public/stage"
       ],
      
     'HC_CMDLINE' => [
-       'VALIDCMDS' => "~|ls|ls -lsa|pwd|cd|cd ..|cp|mv|",
-       'HC_CMDLINE_CD_DEPTH' => "/var/www/YourWebApp/Public/stage"
+       'VALIDCMDS' => "~|ls|ls -lsa|pwd|cd|cd ..|cp|mv|"  
       ],
       
     'HC_HISTORY' => [
@@ -77,6 +79,9 @@ $HC_CONFIG = [
 
     'HC_RECALL_HISTORY' => [
        'MAX_ITEMS' => 50
-      ]
-        
+      ],
+    
+     'HC_WEBSITE' => [
+       'WEBROOT' => "/var/www/YourWebApp/Public"
+      ]     
     ];  

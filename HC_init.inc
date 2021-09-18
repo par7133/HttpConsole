@@ -41,6 +41,15 @@ ini_set('display_errors',1);
 ini_set('log_errors',1);
 
 require "HC_config.inc";
+
+// Checking a little the configuration..
+if (!file_exists(HC_APP_STAGE_PATH)) {
+  die("Stage folder doesn't exist. You must create a stage folder in your web app public path and configur it properly inside the config file.");
+}	
+if (!file_exists(HC_APP_STAGE_PATH . "/.HCsampledir")) {
+  die("Sample folder doesn't exist. You must create a sample folder named '.HCsampledir' inside your stage folder. Give it the proper write permissions.");
+}		
+
 require "HC_const.inc";
 require "HC_funct.inc";
 
