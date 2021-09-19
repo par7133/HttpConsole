@@ -36,8 +36,8 @@
  */
  
 error_reporting(E_ALL & ~ (E_WARNING | E_NOTICE | E_STRICT | E_DEPRECATED));  
-ini_set('display_startup_errors',1);  
-ini_set('display_errors',1);  
+ini_set('display_startup_errors',0);  
+ini_set('display_errors',0);  
 ini_set('log_errors',1);
 
 require "HC_config.inc";
@@ -57,8 +57,8 @@ require "HC_funct.inc";
 
 if (HC_DEBUG) {
   error_reporting(E_ALL | E_STRICT);  
-  ini_set('display_startup_errors',1);  
-  ini_set('display_errors',1);
+  ini_set('display_startup_errors',0);  
+  ini_set('display_errors',0);
   ini_set('log_errors',1); 
 } else {
   error_reporting(E_ALL & ~ (E_WARNING | E_NOTICE | E_STRICT | E_DEPRECATED));  

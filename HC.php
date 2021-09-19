@@ -103,12 +103,15 @@ function updateHistory(&$update, $maxItems) {
    file_put_contents($filepath, implode('', $cmdRecallHistory));	 
  }	 
 
- function updateHistoryWithErr(string $err) {
+ function updateHistoryWithErr(string $err, bool $withCommand = true) 
+ {
    global $prompt;
    global $command;
    	 
    $output = [];  
-   $output[] = $prompt . " " . $command . "\n";
+   if ($withCommand) {
+     $output[] = $prompt . " " . $command . "\n";
+   }
    $output[] = "$err\n";
    updateHistory($output, HC_HISTORY_MAX_ITEMS);  	 
  }	 	 
@@ -478,6 +481,127 @@ function updateHistory(&$update, $maxItems) {
 	return true;
  }
   
+ function upload() {
+
+   global $curPath;
+   global $prompt;
+
+   //if (!empty($_FILES['files'])) {
+   if (!empty($_FILES['files']['tmp_name'][0])) {
+	   
+     // Updating history..
+     $output = [];
+     $output[] = $prompt . " " . "File upload" . "\n";   
+     updateHistory($output, HC_HISTORY_MAX_ITEMS);
+	   	 
+     $uploads = (array)fixMultipleFileUpload($_FILES['files']);
+     
+     //no file uploaded
+     if ($uploads[0]['error'] === HC_UPLOAD_ERR_NO_FILE) {
+       updateHistoryWithErr("No file uploaded.", false);
+       return;
+     } 
+ 
+     foreach($uploads as &$upload) {
+		
+	   switch ($upload['error']) {
+		 case HC_UPLOAD_ERR_OK:
+		   break;
+		 case HC_UPLOAD_ERR_NO_FILE:
+		   updateHistoryWithErr("One or more uploaded files are missing.", false);
+		   return;
+		 case HC_UPLOAD_ERR_INI_SIZE:
+		   updateHistoryWithErr("File exceeded INI size limit.", false);
+		   return;
+		 case HC_UPLOAD_ERR_FORM_SIZE:
+		   updateHistoryWithErr("File exceeded form size limit.", false);
+		   return;
+		 case HC_UPLOAD_ERR_PARTIAL:
+		   updateHistoryWithErr("File only partially uploaded.", false);
+		   return;
+		 case HC_UPLOAD_ERR_NO_TMP_DIR:
+		   updateHistoryWithErr("TMP dir doesn't exist.", false);
+		   return;
+		 case HC_UPLOAD_ERR_CANT_WRITE:
+		   updateHistoryWithErr("Failed to write to the disk.", false);
+		   return;
+		 case HC_UPLOAD_ERR_EXTENSION:
+		   updateHistoryWithErr("A PHP extension stopped the file upload.", false);
+		   return;
+		 default:
+		   updateHistoryWithErr("Unexpected error happened.", false);
+		   return;
+	   }
+		
+	   if (!is_uploaded_file($upload['tmp_name'])) {
+		 updateHistoryWithErr("One or more file have not been uploaded.", false);
+		 return;
+	   }
+		
+	   // name	 
+	   $name = (string)substr((string)filter_var($upload['name']), 0, 255);
+	   if ($name == HC_STR) {
+         updateHistoryWithErr("Invalid file name: " . $name, false);
+         return;
+       } 
+	   $upload['name'] = $name;
+	   
+	   // fileType
+	   $fileType = substr((string)filter_var($upload['type']), 0, 30);
+	   $upload['type'] = $fileType;	 
+	   
+	   // tmp_name
+	   $tmp_name = substr((string)filter_var($upload['tmp_name']), 0, 300);
+	   if ($tmp_name == HC_STR || !file_exists($tmp_name)) {
+         updateHistoryWithErr("Invalid file temp path: " . $tmp_name, false);
+         return;
+       } 
+	   $upload['tmp_name'] = $tmp_name;
+	   
+ 	   //size
+ 	   $size = substr((string)filter_var($upload['size'], FILTER_SANITIZE_NUMBER_INT), 0, 12);
+	   if ($size == "") {
+		 updateHistoryWithErr("Invalid file size.", false);
+		 return;
+	   } 
+	   $upload["size"] = $size;
+
+	   $tmpFullPath = $upload["tmp_name"];
+	   
+	   $originalFilename = pathinfo($name, PATHINFO_FILENAME);
+	   $originalFileExt = pathinfo($name, PATHINFO_EXTENSION);
+	   $FileExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+	   
+	   if ($originalFileExt!==HC_STR) {
+	     $destFileName = $originalFilename . "." . $originalFileExt;
+	   } else {
+		 $destFileName = $originalFilename;  
+       }	   
+       $destFullPath = $curPath . PHP_SLASH . $destFileName;
+	   
+	   if (file_exists($destFullPath)) {
+		 updateHistoryWithErr("destination already exists", false);
+		 return;
+	   }	   
+	    
+	   copy($tmpFullPath, $destFullPath);
+
+       // Updating history..
+       $output = [];
+       $output[] = $destFileName . " " . "uploaded" . "\n";   
+       updateHistory($output, HC_HISTORY_MAX_ITEMS);
+  
+	   // Cleaning up..
+	  
+	   // Delete the tmp file..
+	   unlink($tmpFullPath); 
+	    
+	 }	 
+ 
+   }
+ }	  
+  
+  
  $password = filter_input(INPUT_POST, "Password");
  $command = filter_input(INPUT_POST, "CommandLine");
  $pwd = filter_input(INPUT_POST, "pwd"); 
@@ -513,6 +637,8 @@ function updateHistory(&$update, $maxItems) {
    //echo("opt=" . $opt . "<br>");
    //echo("param1=" . $param1 . "<br>");
    //echo("param2=" . $param2 . "<br>");
+   
+   upload();
    
    if (mb_stripos(HC_CMDLINE_VALIDCMDS, "|" . $command . "|")) {
      
@@ -552,7 +678,10 @@ function updateHistory(&$update, $maxItems) {
 	 } 	   
        
    } else {
-	 updateHistoryWithErr("invalid command");  
+	   
+	 if (empty($_FILES['files']['tmp_name'][0])) {  
+	   updateHistoryWithErr("invalid command");
+	 }    
    }
    	  	
  } else {
@@ -654,7 +783,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="/" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
@@ -662,7 +791,9 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	
 <div style="clear:both; float:left; padding:8px; width:15%; height:100%; text-align:center;">
 	<div style="padding-left:12px;text-align: left;">
-	  &nbsp;Upload
+	  <!--&nbsp;Upload-->
+	  &nbsp;<a href="#" id="upload" style="color:#ffffff">Upload</a>
+	  <input id="files" name="files[]" type="file" accept=".css, .doc,.docx,.gif,.htm,.html,.ico,.inc,.jpg,.js,.php,.pdf,.png,.txt,.xls,.xlsx" style="visibility: hidden;">
 	</div>
     <br><br><br><br><br><br><br>
 <!-- &nbsp;Password<br>

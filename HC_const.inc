@@ -77,3 +77,27 @@ if (!defined("HC_TILDE")) {
 if (!defined("HC_UNDERSCORE")) {
   define('HC_UNDERSCORE', "_");
 }
+if (!defined("HC_UPLOAD_ERR_OK")) {
+  define('HC_UPLOAD_ERR_OK', 0);
+}
+if (!defined("HC_UPLOAD_ERR_INI_SIZE")) {
+  define('HC_UPLOAD_ERR_INI_SIZE', 1);
+}
+if (!defined("HC_UPLOAD_ERR_FORM_SIZE")) {
+  define('HC_UPLOAD_ERR_FORM_SIZE', 2);
+}
+if (!defined("HC_UPLOAD_ERR_PARTIAL")) {
+  define('HC_UPLOAD_ERR_PARTIAL', 3);
+}
+if (!defined("HC_UPLOAD_ERR_NO_FILE")) {
+  define('HC_UPLOAD_ERR_NO_FILE', 4);
+}
+if (!defined("HC_UPLOAD_ERR_NO_TMP_DIR")) {
+  define('HC_UPLOAD_ERR_NO_TMP_DIR', 6);
+}
+if (!defined("HC_UPLOAD_ERR_CANT_WRITE")) {
+  define('HC_UPLOAD_ERR_CANT_WRITE', 7);
+}
+if (!defined("HC_UPLOAD_ERR_EXTENSION")) {
+  define('HC_UPLOAD_ERR_EXTENSION', 8);
+}
