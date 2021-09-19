@@ -43,6 +43,8 @@ define('HC_APP_NAME', "Http Console");
 // salt: yoursalt
 define('HC_APP_HASH', "");
 
+define('HC_APP_SPLASH', true);
+
 define('HC_APP_PATH', "/var/www/YourWebApp/Private/HttpConsole");
 define('HC_APP_PROMPT', "HC:~ $1$");
 define('HC_APP_SALT', "yoursalt");
@@ -63,6 +65,7 @@ $HC_CONFIG = [
    'HC_APP' => [
       'NAME' => "Http Console",
       'HASH' => "",  
+      'SPLASH' => true,
       'PATH' => "/var/www/YourWebApp/Private/HttpConsole",
       'PROMPT' => "HC:~ $1$",
       'SALT' => "yoursalt",

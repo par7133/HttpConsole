@@ -605,7 +605,7 @@ function updateHistory(&$update, $maxItems) {
  $password = filter_input(INPUT_POST, "Password");
  $command = filter_input(INPUT_POST, "CommandLine");
  $pwd = filter_input(INPUT_POST, "pwd"); 
- $hideFB = filter_input(INPUT_POST, "hideFB");
+ $hideSplash = filter_input(INPUT_POST, "hideSplash");
 
  if ($password !== HC_STR) {	
 	$hash = hash("sha256", $password . HC_APP_SALT, false);
@@ -783,24 +783,19 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
-   <a href="/" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
+   <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
 </div>
 	
 <div style="clear:both; float:left; padding:8px; width:15%; height:100%; text-align:center;">
 	<div style="padding-left:12px;text-align: left;">
 	  <!--&nbsp;Upload-->
-	  &nbsp;<a href="#" id="upload" style="color:#ffffff">Upload</a>
+	  &nbsp;<a href="#" id="upload" style="<?php echo(($password===HC_STR?'text-decoration:none;color:gray;':'color:#ffffff;')); ?>" onclick="<?php echo(($password!==HC_STR?'upload()':'')); ?>">Upload</a>
 	  <input id="files" name="files[]" type="file" accept=".css, .doc,.docx,.gif,.htm,.html,.ico,.inc,.jpg,.js,.php,.pdf,.png,.txt,.xls,.xlsx" style="visibility: hidden;">
 	</div>
     <br><br><br><br><br><br><br>
-<!-- &nbsp;Password<br>
-    &nbsp;<input type="text" id="Password" name="Password" style="font-size:10px; color:black; width: 90%; border-radius:3px;" value="<?php echo($password);?>"><br>
-    &nbsp;Salt<br>
-    &nbsp;<input type="text" id="Salt" style="font-size:10px; color:black; width: 90%; border-radius:3px;" autocomplete="off"><br><br>
-    &nbsp;<input type="button" id="Encode" value="Hash Me!" onclick="showEncodedPassword();" style="position:relative;left:-2px; width:92%; color:black; border-radius:2px;"> -->
   
     &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" value="<?php echo($password);?>" autocomplete="off"><br>
     &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" autocomplete="off"><br>
@@ -810,10 +805,11 @@ https://opensource.org/licenses/BSD-3-Clause -->
 
 <div style="float:left; width:85%;height:100%; padding:8px; border-left: 1px solid #2c2f34;">
 	
-	<?php if ($hideFB !== HC_STR): ?>
-	<div id="FirstBanner" style="border-radius:20px; position:relative; left:+3px; width:98%; background-color: #33aced; padding: 20px; margin-bottom:8px;">	
+	<?php if (HC_APP_SPLASH): ?>
+	<?php if ($hideSplash !== HC_STR): ?>
+	<div id="splash" style="border-radius:20px; position:relative; left:+3px; width:98%; background-color: #33aced; padding: 20px; margin-bottom:8px;">	
 	
-	   <button type="button" class="close" aria-label="Close" onclick="closeFirstBanner();" style="position:relative; left:-10px;">
+	   <button type="button" class="close" aria-label="Close" onclick="closeSplash();" style="position:relative; left:-10px;">
           <span aria-hidden="true">&times;</span>
        </button>
 	
@@ -842,6 +838,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	   
 	</div>	
 	<?php endif; ?>
+	<?php endif; ?>
 	
 	&nbsp;Console<br>
 	<div id="Console" style="height:493px; overflow-y:auto; margin-top:10px;">
@@ -866,7 +863,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </div>
 
 <input type="hidden" name="pwd" value="<?php echo($curPath); ?>" style="color:black">
-<input type="hidden" name="hideFB" value="<?php echo($hideFB); ?>">
+<input type="hidden" name="hideSplash" value="<?php echo($hideSplash); ?>">
 
 </form>
 
