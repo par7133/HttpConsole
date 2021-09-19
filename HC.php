@@ -821,7 +821,7 @@ function updateHistory(&$update, $maxItems) {
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
@@ -833,8 +833,9 @@ function updateHistory(&$update, $maxItems) {
 	  &nbsp;<a href="#" id="upload" style="<?php echo(($password===HC_STR?'text-decoration:none;color:gray;':'color:#ffffff;')); ?>" onclick="<?php echo(($password!==HC_STR?'upload()':'')); ?>">Upload</a>
 	  <input id="files" name="files[]" type="file" accept=".css, .doc,.docx,.gif,.htm,.html,.ico,.inc,.jpg,.js,.php,.pdf,.png,.txt,.xls,.xlsx" style="visibility: hidden;">
 	</div>
-    <br><br><br><br><br><br><br>
-  
+    <br><br>
+    <img src="HCres/HCgenius.png" style="position:relative; left:+6px; width:90%; border: 1px dashed #EEEEEE;">
+    &nbsp;<br><br><br>
     &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" value="<?php echo($password);?>" autocomplete="off"><br>
     &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" autocomplete="off"><br>
     &nbsp;<a href="#" onclick="showEncodedPassword();" style="position:relative; left:-2px; top:+5px; color:#ffffff; font-size:12px;">Hash Me!</a>
