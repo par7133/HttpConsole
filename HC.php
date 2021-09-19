@@ -192,7 +192,6 @@ function updateHistory(&$update, $maxItems) {
    updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
    updateHistory($output, HC_HISTORY_MAX_ITEMS);
  }
-
  
  function myExecCDBackwCommand() {
    global $prompt;
@@ -265,8 +264,14 @@ function updateHistory(&$update, $maxItems) {
 	   $virtualPath = HC_STR;
 	   if (file_exists($downloadPath)) {
 		 if (!is_dir($curPath . HC_SLASH . $val) && filesize($curPath . HC_SLASH . $val)<=651000) {
-		   copy($curPath . HC_SLASH . $val, $downloadPath . HC_SLASH . $val . ".hcd");  
-		   $virtualPath = getVirtualPath($downloadPath . HC_SLASH . $val . ".hcd");
+		   $fileext = strtolower(pathinfo($val, PATHINFO_EXTENSION));
+		   if ($fileext === "php") {
+		     copy($curPath . HC_SLASH . $val, $downloadPath . HC_SLASH . $val . ".hcd");  
+		     $virtualPath = getVirtualPath($downloadPath . HC_SLASH . $val . ".hcd");			   	 
+	       } else {
+		     copy($curPath . HC_SLASH . $val, $downloadPath . HC_SLASH . $val);  
+		     $virtualPath = getVirtualPath($downloadPath . HC_SLASH . $val);			   
+		   }	 
 		 }
 	   } else {
 		 $virtualPath=HC_STR;
@@ -281,6 +286,27 @@ function updateHistory(&$update, $maxItems) {
    updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
    updateHistory($output, HC_HISTORY_MAX_ITEMS);
  }
+
+ function myExecPWDCommand() {
+   global $prompt;
+   global $command;
+   global $curPath;
+ 
+    // Exec command..
+   $output = [];
+   $output[] = $prompt . " " . $command . "\n";   
+   exec($command, $output);
+
+   // Update history..
+   foreach ($output as &$val) {
+	 if (mb_stripos("~".$val,HC_APP_STAGE_PATH)) {  
+	   $val = str_replace(dirname(HC_APP_STAGE_PATH), "~ ", $val) . "\n";
+	 }  
+   }	 
+   updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
+   updateHistory($output, HC_HISTORY_MAX_ITEMS);
+ }
+
 
  function parseCommand() {
    global $command;
@@ -434,6 +460,19 @@ function updateHistory(&$update, $maxItems) {
 		return false;
 	  }
 	}    	
+    // param2=="../" && is_root 
+    // param2=="../" && dest exists	
+    if ($param2==="../") {
+	  if ($curPath === HC_APP_STAGE_PATH) {	
+	    updateHistoryWithErr("out of root boundary");
+	    return false;
+	  }  
+	  $path = dirname($curPath) . HC_SLASH . $param1;
+      if (file_exists($path)) {
+		updateHistoryWithErr("destination already exists");	
+		return false;
+      }	  
+	}	
 	return true;
  }
 
@@ -477,7 +516,20 @@ function updateHistory(&$update, $maxItems) {
 		updateHistoryWithErr("destination already exists");	
 		return false;
       }
-    }    	
+    }  
+    // param2=="../" && is_root 
+    // param2=="../" && dest exists	
+    if ($param2==="../") {
+	  if ($curPath === HC_APP_STAGE_PATH) {	
+	    updateHistoryWithErr("out of root boundary");
+	    return false;
+	  }  
+	  $path = dirname($curPath) . HC_SLASH . $param1;
+      if (file_exists($path)) {
+		updateHistoryWithErr("destination already exists");	
+		return false;
+      }	  
+	}	
 	return true;
  }
   
@@ -656,6 +708,10 @@ function updateHistory(&$update, $maxItems) {
 	 } else if ($command === "ls") {
 		 
 	   myExecLSCommand();	 
+	 
+     } else if ($command === "pwd") { 
+	   
+	   myExecPWDCommand();
 	      
      } else {
 	   myExecCommand(); 
@@ -783,7 +839,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
