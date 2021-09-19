@@ -70,6 +70,20 @@
    return $s;
  } 
 
+
+if (!function_exists("is_word")) {
+/**
+ * Determine if the given string is a word 
+ * 
+ * @param string $string the string being checked
+ * @return bool true/false if it a word o not    
+ */
+ function is_word(string $string) {
+   return preg_match("/^[\w\-]+?$/", $string);	 
+ }	 
+
+}
+
 if (!function_exists("left")) { 
 /**
  * Left cut the given substring for the specified length 

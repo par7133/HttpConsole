@@ -338,15 +338,18 @@ function updateHistory(&$update, $maxItems) {
  	     
  }
  
- function is_word(string $string) {
-   return preg_match("/^[\w\-]+?$/", $string);	 
- }	 
- 
  function cdparamValidation() {
 	global $curPath;
+	global $opt;
 	global $param1;
     global $param2;
-    	 
+    global $param3;
+
+    //opt==""
+    if ($opt!=HC_STR) {
+	  updateHistoryWithErr("invalid options");	
+      return false;
+    }	    	 
 	//param1!="" and isword
 	if (($param1===HC_STR) && !is_word($param1)) {
 	  updateHistoryWithErr("invalid dir");	
@@ -354,6 +357,11 @@ function updateHistory(&$update, $maxItems) {
     }
     //param2==""
 	if ($param2!==HC_STR) {
+	  updateHistoryWithErr("invalid parameters");	
+      return false;
+    }	
+    //param3==""
+	if ($param3!=HC_STR) {
 	  updateHistoryWithErr("invalid parameters");	
       return false;
     }	
@@ -366,6 +374,22 @@ function updateHistory(&$update, $maxItems) {
 	return true;
  }	 
  
+ function is_subfolderdest(string $path): bool 
+ {
+	global $curPath;
+	
+	$ret=false;
+	
+	if ($path!=HC_STR) {
+	  $folderName = left($path, strlen($path)-1);
+
+      if (is_dir($curPath . HC_SLASH . $folderName) && (right($path,1)==="/")) {
+	    $ret=true;	
+	  }
+    }
+    return $ret;  
+ }
+ 
  function cpparamValidation() {
 	global $curPath;
 	global $opt;
@@ -374,20 +398,21 @@ function updateHistory(&$update, $maxItems) {
 	global $param3;
 	
 	//opt!="" and opt!="-R" and opt!="-Rp"
-    if (($opt!==HC_STR) && ($opt!=="-R") && ($opt!=="-Rp") && ($opt!=="-p"))	{
-	  updateHistoryWithErr("invalid parameters");	
+    if (($opt!==HC_STR) && ($opt!=="-R") && ($opt!=="-Rp") && ($opt!=="-p")) {
+	  updateHistoryWithErr("invalid options");	
       return false;
     }	
-	//param1!="" and isword
-	if (($param1===HC_STR) && !is_word($param1)) {
+	//param1!="" and isword  
+	if (($param1===HC_STR) || !is_word($param1)) {
 	  updateHistoryWithErr("invalid source path");	
       return false;
     }	
-	//param2!="" and isword
-	if (($param2===HC_STR) && !is_word($param2)) {
+	//param2!="" and (isword or param2=="../" or is_subfolderdest)
+	if (($param2===HC_STR) || (!is_word($param2) && ($param2!="../") && !is_subfolderdest($param2))) {
       updateHistoryWithErr("invalid destination path");
       return false;
     }
+    //param3==""
     if ($param3!=HC_STR) {
       updateHistoryWithErr("invalid parameters");
       return false;
@@ -398,12 +423,14 @@ function updateHistory(&$update, $maxItems) {
 	  updateHistoryWithErr("source must exists");	
 	  return false;
 	}  	
-	//param2 doesn't exist 
-	$path = $curPath . HC_SLASH . $param2;
-	if (file_exists($path)) {
-	  updateHistoryWithErr("destination already exists");	
-	  return false;
-	}  	
+	//isword(param2) && doesn't exist 
+	if (is_word($param2)) {
+	  $path = $curPath . HC_SLASH . $param2;
+	  if (file_exists($path)) {
+		updateHistoryWithErr("destination already exists");	
+		return false;
+	  }
+	}    	
 	return true;
  }
 
@@ -415,20 +442,21 @@ function updateHistory(&$update, $maxItems) {
 	global $param3; 
 	
 	//opt!="" and opt!="-R"
-    if ($opt!==HC_STR)	{
-	  updateHistoryWithErr("invalid parameters");	
+    if ($opt!=HC_STR)	{
+	  updateHistoryWithErr("invalid options");	
       return false;
     }	
 	//param1!="" and isword
-	if (($param1===HC_STR) && !is_word($param1)) {
+	if (($param1===HC_STR) || !is_word($param1)) {
 	  updateHistoryWithErr("invalid source path");	
       return false;
     }	
-	//param2!="" and isword
-	if (($param2===HC_STR) && !is_word($param2)) {
+	//param2!="" and (isword or param2=="../" or is_subfolderdest)
+	if (($param2===HC_STR) || (!is_word($param2) && ($param2!="../") && !is_subfolderdest($param2))) {
       updateHistoryWithErr("invalid destination path");
       return false;
     }
+    //param3!=""
     if ($param3!=HC_STR) {
       updateHistoryWithErr("invalid parameters");
       return false;
@@ -439,12 +467,14 @@ function updateHistory(&$update, $maxItems) {
 	  updateHistoryWithErr("source must exists");	
 	  return false;
 	}  	
-	//param2 doesn't exist 
-	$path = $curPath . HC_SLASH . $param2;
-	if (file_exists($path)) {
-	  updateHistoryWithErr("destination already exists");	
-	  return false;
-	}  	
+	//isword(param2) && doesn't exist
+	if (is_word($param2)) {
+	  $path = $curPath . HC_SLASH . $param2;
+	  if (file_exists($path)) {
+		updateHistoryWithErr("destination already exists");	
+		return false;
+      }
+    }    	
 	return true;
  }
   
@@ -610,6 +640,10 @@ https://opensource.org/licenses/BSD-3-Clause -->
      });
 		  
      window.addEventListener("load", function() {
+		 
+		 <?php if($password===HC_STR):?>
+		    $("#Password").addClass("emptyfield");
+		 <?php endif; ?>
 		 maxY = document.getElementById("Console").scrollHeight;
 		 //alert(maxY);
          document.getElementById("Console").scrollTo(0, maxY);
@@ -663,8 +697,8 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	   As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, you must follow some simple directives for an optimal first setup:<br>
 	   <ol>
 	   <li>Create a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file.</li>
-	   <li>Inside the stage path create a ".HCsampledir" folder and give to this folder the write permission. This folder will be the sample folder to copy from to create new folders with write permissions inside the stage path.</li>
-	   <li>Likewise create an "upload" folder inside the stage path giving the right permissions.</li>
+	   <li>In the stage path create a ".HCsampledir" folder and give to this folder the write permission. This folder will be the sample folder to copy from new folders inside the stage path.</li>
+	   <li>Likewise, in the stage path create an empty ".HCsamplefile" and give to this file the write permission. This file will be the sample file to copy from new files inside the stage path.</li>
 	   <li>Configure the max history items and max recall history items as required (default: 50).</li>	      
 	   </ol>
 	   
