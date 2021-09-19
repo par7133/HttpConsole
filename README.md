@@ -4,7 +4,7 @@ Hello and welcome to Http Console!
    
 Http Console is a light and simple web console to manage your website.     
    
-Http Console is supplied AS-IS and we do not take any responsibility for its misusage.    
+Http Console is released under GPLv3 license, is supplied AS-IS and we do not take any responsibility for its misusage.    
    
 First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.   
    
