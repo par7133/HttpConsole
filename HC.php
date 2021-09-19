@@ -1,38 +1,29 @@
 <?php
 
 /**
- * Copyright (c) 2016, 2024, 5 Mode's contributors
- * All rights reserved.
+ * Copyright 2021, 2024 5 Mode
+ *
+ * This file is part of Http Console.
+ *
+ * Http Console is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Http Console is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.  
  * 
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither 5 Mode nor the names of its contributors 
- *       may be used to endorse or promote products derived from this software 
- *       without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * You should have received a copy of the GNU General Public License
+ * along with Http Console. If not, see <https://www.gnu.org/licenses/>.
  *
  * HC.php
  * 
  * Http Console home page.
  *
  * @author Daniele Bonini <my25mb@aol.com>
- * @copyrights (c) 2016, 2024, 5 Mode     
- * @license https://opensource.org/licenses/BSD-3-Clause 
+ * @copyrights (c) 2021, 2024, 5 Mode      
  */
  
  require "HC_init.inc";
@@ -759,32 +750,23 @@ function updateHistory(&$update, $maxItems) {
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   
 <!--
-Copyright (c) 2016, 2024, 5 Mode
-All rights reserved.
+    Copyright 2021, 2024 5 Mode
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-  * Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
-  * Neither 5 Mode nor the names of its contributors 
-    may be used to endorse or promote products derived from this software 
-    without specific prior written permission.
+    This file is part of Http Console.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    Http Console is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-https://opensource.org/licenses/BSD-3-Clause -->
+    Http Console is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Http Console. If not, see <https://www.gnu.org/licenses/>.
+ -->
   
     
   <title>Http Console: Ubiquity c'est la vie..</title>
@@ -839,7 +821,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
