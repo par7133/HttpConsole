@@ -839,7 +839,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
