@@ -821,7 +821,7 @@ function updateHistory(&$update, $maxItems) {
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
@@ -855,7 +855,7 @@ function updateHistory(&$update, $maxItems) {
 	   
 	   Http Console is a light and simple web console to manage your website.<br><br>
 	   
-	   Http Console is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
+	   Http Console is released under GPLv3 license, is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
 	   
 	   First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.<br><br>
 	   
