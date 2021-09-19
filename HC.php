@@ -834,12 +834,11 @@ function updateHistory(&$update, $maxItems) {
 	  <input id="files" name="files[]" type="file" accept=".css, .doc,.docx,.gif,.htm,.html,.ico,.inc,.jpg,.js,.php,.pdf,.png,.txt,.xls,.xlsx" style="visibility: hidden;">
 	</div>
     <br><br>
-    <img src="HCres/HCgenius.png" style="position:relative; left:+6px; width:90%; border: 1px dashed #EEEEEE;">
+    <img src="HCres/HCgenius.png" alt="HC Genius" title="HC Genius" style="position:relative; left:+6px; width:90%; border: 1px dashed #EEEEEE;">
     &nbsp;<br><br><br>
     &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" value="<?php echo($password);?>" autocomplete="off"><br>
     &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" autocomplete="off"><br>
-    &nbsp;<a href="#" onclick="showEncodedPassword();" style="position:relative; left:-2px; top:+5px; color:#ffffff; font-size:12px;">Hash Me!</a>
-     
+    &nbsp;<a href="#" onclick="showEncodedPassword();" style="position:relative; left:-2px; top:+5px; color:#ffffff; font-size:12px;">Hash Me!</a>     
 </div>
 
 <div style="float:left; width:85%;height:100%; padding:8px; border-left: 1px solid #2c2f34;">
@@ -894,6 +893,8 @@ function updateHistory(&$update, $maxItems) {
 	<?php endforeach; ?>	
 	</datalist>	
 	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 
 <div class="footer">
