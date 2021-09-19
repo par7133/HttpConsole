@@ -783,7 +783,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 </head>
 <body>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>
@@ -821,7 +821,7 @@ https://opensource.org/licenses/BSD-3-Clause -->
 	   
 	   First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.<br><br>
 	   
-	   As you are going to make work Http Console in the PHP process environment, using a limited web server or phpfpm user, you must follow some simple directives for an optimal first setup:<br>
+	   As you are going to run Http Console in the PHP process context, using a limited web server or phpfpm user, you must follow some simple directives for an optimal first setup:<br>
 	   <ol>
 	   <li>Create a "stage" folder in your web app path; give to the stage folder the write permissions; and set the stage path in the config file.</li>
 	   <li>In the stage path create a ".HCsampledir" folder and give to this folder the write permission. This folder will be the sample folder to copy from new folders inside the stage path.</li>
