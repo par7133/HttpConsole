@@ -33,9 +33,9 @@
  * @license https://opensource.org/licenses/BSD-3-Clause 
  */
 
-function closeFirstBanner() {
-  $("#hideFB").val("1");
-  $("#FirstBanner").hide();	
+function closeSplash() {
+  $("#hideSplash").val("1");
+  $("#splash").hide();	
 }
 
 
@@ -73,11 +73,9 @@ function showEncodedPassword() {
    alert(msg + "\n\n" + passw);	
 }
 
-$("#upload").on("click", function(e) {
-  e.preventDefault();
-
+function upload() {
   $("input#files").click();
-}); 
+} 
 
 $("input#files").on("change", function(e) {
   frmHC.submit();
