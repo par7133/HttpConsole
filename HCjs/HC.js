@@ -73,6 +73,16 @@ function showEncodedPassword() {
    alert(msg + "\n\n" + passw);	
 }
 
+$("#upload").on("click", function(e) {
+  e.preventDefault();
+
+  $("input#files").click();
+}); 
+
+$("input#files").on("change", function(e) {
+  frmHC.submit();
+});
+
 $("#Password").on("keydown", function(e){
 	$("#Password").removeClass("emptyfield");
 });	
