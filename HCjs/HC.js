@@ -29,6 +29,10 @@ function closeSplash() {
   $("#splash").hide();	
 }
 
+function startApp() {
+  $("#HCsplash").hide();
+  $("#frmHC").show();	
+}	
 
 /**
  * Encrypt the given string
@@ -88,7 +92,10 @@ window.addEventListener("load", function() {
   $(".footer").css("width", parseInt(window.innerWidth)+"px");
   $("#footerCont").css("width", parseInt(window.innerWidth)+"px");
   
+  setTimeout("startApp()", 5000);
+  
   document.getElementById("CommandLine").focus();
+  
   
 }, true);
 
