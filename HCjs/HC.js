@@ -87,6 +87,8 @@ $("#Salt").on("keydown", function(e){
 
 window.addEventListener("load", function() {
   
+  frmHC.hide();
+  
   setTimeout("setFooterPos()", 3000);
 
   $(".footer").css("width", parseInt(window.innerWidth)+"px");
