@@ -21,3 +21,6 @@ cd, cd.., cp, cp -R, ls, ls -lsa, mv, pwd
   
 Hope you can enjoy it and let us know about any feedback: info@httpconsole.com   
 	   
+### Screenshot:
+
+ ![Http Console in action](/HCres/screenshot1.png)
