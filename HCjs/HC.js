@@ -43,7 +43,11 @@ function encryptSha2(string) {
 
 function setFooterPos() {
   if (document.getElementById("footerCont")) {
-    tollerance = 25;
+	if ($("#Password").val() === "") {  
+      tollerance = 48;
+    } else {
+	  tollerance = 15;
+	}  	  
     $("#footerCont").css("top", parseInt( window.innerHeight - $("#footerCont").height() - tollerance ) + "px");
     $("#footer").css("top", parseInt( window.innerHeight - $("#footer").height() - tollerance ) + "px");
   }
@@ -83,9 +87,6 @@ window.addEventListener("load", function() {
     
   setTimeout("setFooterPos()", 3000);
 
-  $(".footer").css("width", parseInt(window.innerWidth)+"px");
-  $("#footerCont").css("width", parseInt(window.innerWidth)+"px");
-  
   document.getElementById("CommandLine").focus();  
   
 }, true);
@@ -93,9 +94,6 @@ window.addEventListener("load", function() {
 window.addEventListener("resize", function() {
 
   setTimeout("setFooterPos()", 3000);
-
-  $(".footer").css("width", parseInt(window.innerWidth)+"px");
-  $("#footerCont").css("width", parseInt(window.innerWidth)+"px");
 
 }, true);
 
