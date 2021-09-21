@@ -41,7 +41,7 @@ define('HC_APP_PROMPT', "HC:~ $1$");
 define('HC_APP_SALT', "yoursalt");
 define('HC_APP_STAGE_PATH', "/var/www/YourWebApp/Public/stage");
 
-define('HC_CMDLINE_VALIDCMDS', "~|ls|ls -lsa|pwd|cd|cd ..|cp|mv|");
+define('HC_CMDLINE_VALIDCMDS', "~|help|ls|ls -lsa|pwd|cd|cd ..|cp|mv|");
 
 define('HC_HISTORY_MAX_ITEMS', 50);
 
@@ -64,7 +64,7 @@ $HC_CONFIG = [
       ],
      
     'HC_CMDLINE' => [
-       'VALIDCMDS' => "~|ls|ls -lsa|pwd|cd|cd ..|cp|mv|"  
+       'VALIDCMDS' => "~|help|ls|ls -lsa|pwd|cd|cd ..|cp|mv|"  
       ],
       
     'HC_HISTORY' => [
