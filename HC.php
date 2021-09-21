@@ -278,6 +278,37 @@ function updateHistory(&$update, $maxItems) {
    updateHistory($output, HC_HISTORY_MAX_ITEMS);
  }
 
+ function myExecHelpCommand() {
+   global $prompt;
+   global $command;
+ 
+    // Exec command..
+   $output = [];
+   $output[] = $prompt . " " . $command . "\n";   
+   //exec($command, $output);
+
+   //cd, cd.., cp, cp -p, cp -R, help, ls, ls -lsa, mv, pwd
+
+   $output[] = "Copyright 2021, 2024 5 Mode" . "\n";
+   $output[] = "Http Console is licensed GNUv3" . "\n";
+   $output[] = "" . "\n";
+   $output[] = "Supported commands are:" . "\n";
+   $output[] = "cd" . "\n";
+   $output[] = "cd.." . "\n";
+   $output[] = "cp" . "\n";
+   $output[] = "cp -p" . "\n";
+   $output[] = "cd -R" . "\n";
+   $output[] = "help" . "\n";
+   $output[] = "ls" . "\n";
+   $output[] = "ls -lsa" . "\n";
+   $output[] = "mv" . "\n";
+   $output[] = "pwd" . "\n";
+   
+   // Update History
+   updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
+   updateHistory($output, HC_HISTORY_MAX_ITEMS);
+ }
+
  function myExecPWDCommand() {
    global $prompt;
    global $command;
@@ -400,8 +431,16 @@ function updateHistory(&$update, $maxItems) {
 	
 	$ret=false;
 	
+	if ($path === "../") {
+	  return $ret;	
+	}	
+	
 	if ($path!=HC_STR) {
 	  $folderName = left($path, strlen($path)-1);
+
+      if (!is_word($folderName)) {
+		return $ret;  
+	  }	  
 
       if (is_dir($curPath . HC_SLASH . $folderName) && (right($path,1)==="/")) {
 	    $ret=true;	
@@ -426,7 +465,7 @@ function updateHistory(&$update, $maxItems) {
 	if (($param1===HC_STR) || !is_word($param1)) {
 	  updateHistoryWithErr("invalid source path");	
       return false;
-    }	
+    }
 	//param2!="" and (isword or param2=="../" or is_subfolderdest)
 	if (($param2===HC_STR) || (!is_word($param2) && ($param2!="../") && !is_subfolderdest($param2))) {
       updateHistoryWithErr("invalid destination path");
@@ -696,8 +735,12 @@ function updateHistory(&$update, $maxItems) {
        } else {
 		 myExecCDBackwCommand();
 	   }	
-	
-	 } else if ($command === "ls") {
+
+	 } else if ($command === "help") {
+		 
+	   myExecHelpCommand();	 
+	 
+     } else if ($command === "ls") {
 		 
 	   myExecLSCommand();	 
 	 
@@ -844,7 +887,7 @@ function updateHistory(&$update, $maxItems) {
    <img src="HCres/hcsplash.gif" style="width:310px;">
 </div>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
@@ -878,7 +921,7 @@ function updateHistory(&$update, $maxItems) {
 	   
 	   Http Console is a light and simple web console to manage your website.<br><br>
 	   
-	   Http Console is released under GPLv3 license, is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
+	   Http Console is released under GPLv3 license, it is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
 	   
 	   First step, use the left side panel password and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.<br><br>
 	   
@@ -893,7 +936,7 @@ function updateHistory(&$update, $maxItems) {
 	   <br>	
 	   
 	   Http Console understands a limited set of commands with a far limited set of parameters:<br>
-	   cd, cd.., cp, cp -R, ls, ls -lsa, mv, pwd<br><br>	   
+	   cd, cd.., cp, cp -p, cp -R, help, ls, ls -lsa, mv, pwd<br><br>	   
 	   
 	   Hope you can enjoy it and let us know about any feedback: <a href="mailto:info@httpconsole.com" style="color:#e6d236;">info@httpconsole.com</a>
 	   
