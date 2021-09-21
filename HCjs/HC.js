@@ -63,7 +63,7 @@ function showEncodedPassword() {
 	 return;  
    }	   	
    passw = encryptSha2( $("#Password").val() + $("#Salt").val());
-   msg = "Please set your password in the config file with this value:";
+   msg = "Please set your hash in the config file with this value:";
    alert(msg + "\n\n" + passw);	
 }
 
