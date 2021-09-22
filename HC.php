@@ -294,15 +294,18 @@ function updateHistory(&$update, $maxItems) {
    $output[] = "" . "\n";
    $output[] = "Supported commands are:" . "\n";
    $output[] = "cd" . "\n";
-   $output[] = "cd.." . "\n";
+   $output[] = "cd .." . "\n";
    $output[] = "cp" . "\n";
    $output[] = "cp -p" . "\n";
-   $output[] = "cd -R" . "\n";
+   $output[] = "cp -R" . "\n";
    $output[] = "help" . "\n";
    $output[] = "ls" . "\n";
    $output[] = "ls -lsa" . "\n";
    $output[] = "mv" . "\n";
    $output[] = "pwd" . "\n";
+   $output[] = "\n";
+   $output[] = "Thx for using Http Console! :)" . "\n";
+   $output[] = "\n";
    
    // Update History
    updateRecallHistory($command, HC_RECALL_HISTORY_MAX_ITEMS);
@@ -400,9 +403,14 @@ function updateHistory(&$update, $maxItems) {
     if ($opt!=HC_STR) {
 	  updateHistoryWithErr("invalid options");	
       return false;
+    }
+    //param1==""
+	if ($param1===HC_STR) {
+	  updateHistoryWithErr("invalid parameters");	
+      return false;
     }	    	 
-	//param1!="" and isword
-	if (($param1===HC_STR) && !is_word($param1)) {
+	//param1!="" and !isword
+	if (($param1!==HC_STR) && !is_word($param1)) {
 	  updateHistoryWithErr("invalid dir");	
       return false;
     }
@@ -476,6 +484,11 @@ function updateHistory(&$update, $maxItems) {
       updateHistoryWithErr("invalid parameters");
       return false;
     }
+    //param1 != param2
+    if ($param1 === $param2) {
+      updateHistoryWithErr("source same as destination");
+      return false;	  	
+    }
 	//param1 exist
 	$path = $curPath . HC_SLASH . $param1;
 	if (!file_exists($path)) {
@@ -532,6 +545,11 @@ function updateHistory(&$update, $maxItems) {
     if ($param3!=HC_STR) {
       updateHistoryWithErr("invalid parameters");
       return false;
+    }
+    //param1 != param2
+    if ($param1 === $param2) {
+      updateHistoryWithErr("source same as destination");
+      return false;	  	
     }
 	//param1 exist
 	$path = $curPath . HC_SLASH . $param1;
@@ -866,7 +884,8 @@ function updateHistory(&$update, $maxItems) {
 	}			
     <?php if($hideHCSplash!=="1"): ?>
 	window.addEventListener("load", function() {
-		  
+	
+	  $("#HCsplash").show();	  
 	  setTimeout("startApp()", 5000);
 	  
 	}, true);
@@ -875,7 +894,7 @@ function updateHistory(&$update, $maxItems) {
 		  
 	  startApp();
 	  
-	}, true);	
+	});	
     <?php endif; ?>
 
   </script>    
@@ -883,11 +902,11 @@ function updateHistory(&$update, $maxItems) {
 </head>
 <body>
 
-<div id="HCsplash" style="padding-top: 200px; text-align:center;" style="display:<?php echo(($hideHCSplash==="1"?"none":"inline"));?>;">
+<div id="HCsplash" style="padding-top: 200px; text-align:center;" style="display:none;">
    <img src="HCres/hcsplash.gif" style="width:310px;">
 </div>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>

@@ -38,7 +38,10 @@ if (!file_exists(HC_APP_STAGE_PATH)) {
   die("Stage folder doesn't exist. You must create a stage folder in your web app public path and configur it properly inside the config file.");
 }	
 if (!file_exists(HC_APP_STAGE_PATH . "/.HCsampledir")) {
-  die("Sample folder doesn't exist. You must create a sample folder named '.HCsampledir' inside your stage folder. Give it the proper write permissions.");
+  die("Sample folder doesn't exist. You must create a sample folder named '.HCsampledir' inside your stage folder. Give to it the proper write permissions.");
+}		
+if (!file_exists(HC_APP_STAGE_PATH . "/.HCsamplefile")) {
+  die("Sample file doesn't exist. You must create a sample file named '.HCsamplefile' inside your stage folder. Give to it the proper write permissions.");
 }		
 
 require "HC_const.inc";

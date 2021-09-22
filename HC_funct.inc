@@ -97,6 +97,11 @@ if (!function_exists("is_word")) {
  * @return bool true/false if it a word o not    
  */
  function is_word(string $string) {
+	 
+   if (($string === ".") || ($string === "..")) {
+	  return false;
+   }	  	 
+	 
    return preg_match("/^[\w\-\.]+?$/", $string);	 
  }	 
 
