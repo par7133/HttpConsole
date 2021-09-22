@@ -840,7 +840,6 @@ function updateHistory(&$update, $maxItems) {
   <meta name="robots" content="noindex"/>
   
   <script src="./HCjs/jquery-3.1.0.min.js" type="text/javascript"></script>
-  <script src="./HCjs/jquery-ui.1.12.1.min.js" type="text/javascript"></script>
   <script src="./HCjs/HC_common.js" type="text/javascript"></script>
   <script src="./HCjs/bootstrap.min.js" type="text/javascript"></script>
   <script src="./HCjs/sha.js" type="text/javascript"></script>
@@ -848,7 +847,6 @@ function updateHistory(&$update, $maxItems) {
   <script src="./HCjs/HC.js" type="text/javascript" defer></script>
   
   <link href="./HCcss/bootstrap.min.css" type="text/css" rel="stylesheet">
-  <link href="./HCcss/jquery-ui.1.12.1.css" type="text/css" rel="stylesheet">
   <link href="./HCcss/style.css?v=<?php echo(time()); ?>" type="text/css" rel="stylesheet">
      
   <script>
@@ -906,7 +904,7 @@ function updateHistory(&$update, $maxItems) {
    <img src="HCres/hcsplash.gif" style="width:310px;">
 </div>
 
-<form id="frmHC" method="POST" action="HC.php" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
+<form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
 
 <div class="header">
    <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
