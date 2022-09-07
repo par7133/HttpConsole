@@ -49,19 +49,44 @@
   <link href="/HCcss/style.css?v=1631827555" type="text/css" rel="stylesheet">
 
   <script>	
+  function hideTitle() {
+    $("#myh1").hide("slow");
+  }
+  
+  function startApp() {
+    
+    $("#HCsplash").css("display","none");
+    
+	  //$("#HCsplash").hide("slow");
+    $(document.body).css("background","#ffffff");
+	  $("#frmHC").show();
+	}			
 
-      function startApp() {
-	    $("#HCsplash").hide();
-	    $("#frmHC").show();  	
-	  }	
-		
-	  window.addEventListener("load", function() {
-		
-        $("#frmHC").hide();  
-        $("#HCsplash").show("slow");
-	    setTimeout("startApp()", 5000);
-	  
-	  }, true);	
+  function _startApp() {
+    setTimeout("startApp()", 1000);    
+  }
+
+	window.addEventListener("load", function() {
+	
+    $("#frmHC").hide();
+    
+    //Splash
+    $("#HCsplash").show();	
+    
+    //$(document.body).css("background","#000000");
+	  //$("#HCsplash").show("slow");	  
+	  //setTimeout("hideTitle()", 2000);
+    //setTimeout("startApp()", 4000);
+
+	}, true);
+
+  window.addEventListener("load", function() {
+      
+    // Fisnished the Intro load the app..
+    //document.getElementById("vplayer").onended=_startApp;
+    setTimeout("_startApp()", 6000);
+  
+  });
 	
   </script>
          
@@ -72,13 +97,13 @@
    <img src="/HCres/hcsplash.gif" style="width:310px;">
 </div>
 
-<form id="frmHC" method="POST" target="_self" enctype="multipart/form-data" style="display:inline;">
+<form id="frmHC" method="POST" target="_self" enctype="multipart/form-data" style="display:none;">
 
 <div class="header">
    <a href="/" style="color:white; text-decoration: none;"><img src="/HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:my25mb@aol.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
 </div>
 	
-<div style="clear:both; float:left; padding:8px; width:15%; height:100%; text-align:center;">
+<div style="clear:both; float:left; padding:8px; width:15%; height:100%; border-right: 1px solid #2c2f34; text-align:center;">
 	<div style="padding-left:10px;text-align: left;">
 	  &nbsp;Download<br>	
 	  &nbsp;<a href="https://github.com/par7133/HttpConsole/archive/refs/tags/v1.2.2.zip">Release 1.2.2 (zip)</a><br>
@@ -87,13 +112,13 @@
     <br><br>
     <img src="/HCres/HCgenius.png" alt="HC Genius" title="HC Genius" style="position:relative; left:+6px; width:90%; border: 1px dashed #EEEEEE;">
     &nbsp;<br><br><br>
-    &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" value="" autocomplete="off"><br>
-    &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; border-radius:3px;" autocomplete="off"><br>
+    &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; height:30px; border-radius:3px;" value="" autocomplete="off"><br>
+    &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; height:30px; border-radius:3px;" autocomplete="off"><br>
     &nbsp;<a href="#" onclick="showEncodedPassword();" style="position:relative; left:-2px; top:+5px; color:#ffffff; font-size:12px;">Hash Me!</a>
     <br><br><br>
 </div>
 
-<div style="float:left; width:85%;height:100%; padding:8px; border-left: 1px solid #2c2f34;">
+<div style="float:left; width:85%;height:100%; padding:8px;">
 	
 	   <div id="splash" style="border-radius:20px; position:relative; left:+3px; width:98%; background-color: #33aced; padding: 20px; margin-bottom:8px;">	
 	
@@ -124,6 +149,8 @@
 	   
 	   Hope you can enjoy it and let us know about any feedback: <a href="mailto:my25mb@aol.com" style="color:#e6d236;">my25mb@aol.com</a>
 	   
+	   <br><br><br>	   
+		   
 	</div>	
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
