@@ -45,10 +45,10 @@ body {
   width: 102%; 
   border: 1px solid #C2DBF2; 
   padding: 7px; 
-  background: #ffedf0; 
-  opacity: 0.0;
+  background: #ffffff; 
+  opacity: 0.3;
   color:white; 
-  font-family: Sans;
+  font-family: Arial,Sans,Verdana;
   font-size: 12px; 
   text-align: center; 
   z-index: 99990;
@@ -63,7 +63,7 @@ body {
   padding: 7px; 
   opacity: 1.0;
   color:black; 
-  font-family: Sans;
+  font-family: Arial,Sans,Verdana;
   font-size: 12px; 
   font-weight: 400;
   text-align: right; 
