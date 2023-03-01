@@ -702,11 +702,16 @@ function updateHistory(&$update, $maxItems) {
  }	  
   
   
- $password = filter_input(INPUT_POST, "Password");
- $command = filter_input(INPUT_POST, "CommandLine");
- $pwd = filter_input(INPUT_POST, "pwd"); 
- $hideSplash = filter_input(INPUT_POST, "hideSplash");
- $hideHCSplash = filter_input(INPUT_POST, "hideHCSplash");
+ $password = filter_input(INPUT_POST, "Password")??"";
+ $password = strip_tags($password);
+ $command = filter_input(INPUT_POST, "CommandLine")??"";
+ $command = strip_tags($command);
+ $pwd = filter_input(INPUT_POST, "pwd")??""; 
+ $pwd = strip_tags($pwd);
+ $hideSplash = filter_input(INPUT_POST, "hideSplash")??"";
+ $hideSplash = strip_tags($hideSplash);
+ $hideHCSplash = filter_input(INPUT_POST, "hideHCSplash")??"";
+ $hideHCSplash = strip_tags($hideHCSplash);
 
  if ($password !== HC_STR) {	
 	$hash = hash("sha256", $password . HC_APP_SALT, false);
@@ -907,7 +912,7 @@ function updateHistory(&$update, $maxItems) {
 <form id="frmHC" method="POST" action="/hc" target="_self" enctype="multipart/form-data" style="display:<?php echo(($hideHCSplash==="1"?"inline":"none"));?>;">
 
 <div class="header">
-   <a href="http://httpconsole.5mode.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:my25mb@aol.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
+   <a href="http://httpconsole.com" target="_blank" style="color:white; text-decoration: none;"><img src="HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:info@httpconsole.com" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-331-4029415" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
 </div>
 	
 <div style="clear:both; float:left; padding:8px; width:15%; height:100%; text-align:center;">
@@ -955,7 +960,7 @@ function updateHistory(&$update, $maxItems) {
 	   Http Console understands a limited set of commands with a far limited set of parameters:<br>
 	   cd, cd.., cp, cp -p, cp -R, help, ls, ls -lsa, mv, pwd<br><br>	   
 	   
-	   Hope you can enjoy it and let us know about any feedback: <a href="mailto:my25mb@aol.com" style="color:#e6d236;">my25mb@aol.com</a>
+	   Hope you can enjoy it and let us know about any feedback: <a href="mailto:info@httpconsole.com" style="color:#e6d236;">info@httpconsole.com</a>
 	   
 	</div>	
 	<?php endif; ?>
