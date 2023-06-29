@@ -19,7 +19,7 @@ you must follow some simple directives for an optimal first setup:
 Http Console understands a limited set of commands with a far limited set of parameters:  
 cd, cd.., cp, cp -p, cp -R, help, ls, ls -lsa, mv, pwd  	   
   
-Hope you can enjoy it and let us know about any feedback: my25mb@aol.com   
+Hope you can enjoy it and let us know about any feedback: posta@elettronica.lol   
 	   
 ### Screenshot:
 
