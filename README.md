@@ -23,4 +23,4 @@ cd, cd.., cp, cp -p, cp -R, help, ls, ls -lsa, mv, pwd
 
  ![Http Console in action](/HCres/screenshot1.png)
 
-Feedback: posta@elettronica.lol
+Feedback: <a href="mailto:code@gaox.io">code@gaox.io</a>
