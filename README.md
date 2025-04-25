@@ -18,7 +18,13 @@ you must follow some simple directives for an optimal first setup:
   
 Http Console understands a limited set of commands with a far limited set of parameters:  
 cd, cd.., cp, cp -p, cp -R, help, ls, ls -lsa, mv, pwd  	      
-	   
+
+Type in your password followed by your command.
+
+For any need of software additions, plugins and improvements please write to <a href="mailto:info@5mode.com">info@5mode.com</a>  
+
+To help please donate by clicking <a href="https://gaox.io/l/dona1">https://gaox.io/l/dona1</a> and filling the form.
+    
 ### Screenshot:
 
  ![Http Console in action](/HCres/screenshot1.png)
