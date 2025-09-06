@@ -89,7 +89,7 @@
 
   window.addEventListener("load", function() {
 	  
-    setTimeout("_startApp()", 6000);
+    setTimeout("_startApp()", 4000);
   
   });
 	
@@ -99,7 +99,7 @@
 <body>
 
 <div id="HCsplash" style="padding-top: 200px; text-align:center;display:none;">
-   <img src="/HCres/hcsplash.gif" style="width:310px;">
+   <img src="/HCres/hclogo.png" style="width:210px;">
 </div>
 
 <form id="frmHC" method="POST" target="_self" enctype="multipart/form-data" style="display:none;">
@@ -108,21 +108,23 @@
    <a href="/" style="color:white; text-decoration: none;"><img src="/HCres/hclogo.png" style="width:48px;">&nbsp;Http Console</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/HttpConsole" style="color:#ffffff"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:code@gaox.io" style="color:#ffffff"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-378-0812391" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:white;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
 </div>
 	
-<div style="clear:both; float:left; padding:8px; width:15%; height:700px; border-right: 1px solid #2c2f34; text-align:center;">
-	<div style="padding-left:10px;text-align: left;">
-	  <a href="https://github.com/par7133/HttpConsole/archive/refs/tags/v1.2.8.zip">Rel. 1.2.8 (zip)</a><br>
-	  <a href="https://github.com/par7133/HttpConsole/archive/refs/tags/v1.2.8.tar.gz">Rel. 1.2.8 (tar.gz)</a><br>
+<div style="clear:both; padding:8px; width:100%; height:110px; overflow-y:115px; border-right: 1px solid #2c2f34; text-align:center;">
+	<div style="float:left;width:170px;padding-left:10px;text-align: left;">
+	  <a href="https://github.com/par7133/HttpConsole/archive/refs/tags/v1.2.8.zip">1.2.8 (zip)</a><br>
+	  <a href="https://github.com/par7133/HttpConsole/archive/refs/tags/v1.2.8.tar.gz">1.2.8 (tar.gz)</a><br>
 	</div>  
     <br><br>
-    <img src="/HCres/HCgenius.png" alt="HC Genius" title="HC Genius" style="position:relative; left:+6px; width:90%; border: 1px dashed #EEEEEE;">
-    &nbsp;<br><br><br>
+    <!--<img src="/HCres/HCgenius.png" alt="HC Genius" title="HC Genius" style="position:relative; left:+6px; width:90%; border: 1px dashed #EEEEEE;">-->
+	<div style="float:left;width:230px;">
     &nbsp;<input type="text" id="Password" name="Password" placeholder="password" style="font-size:10px; background:#393939; color:#ffffff; width: 90%; height:30px; border-radius:3px;" value="" autocomplete="off"><br>
     &nbsp;<input type="text" id="Salt" placeholder="salt" style="position:relative; top:+5px; font-size:10px; background:#393939; color:#ffffff; width: 90%; height:30px; border-radius:3px;" autocomplete="off"><br>
     &nbsp;<a href="#" onclick="showEncodedPassword();" style="position:relative; left:-2px; top:+5px; color:#ffffff; font-size:12px;">Hash Me!</a>
+	</div>
+	&nbsp;<br><br><br>
     <br><br><br>
 </div>
 
-<div style="float:left; width:85%;height:100%; padding:8px;">
+<div style="100%; height:100%; padding:8px;">
 	
 	   <div id="splash" style="border-radius:20px; position:relative; left:+3px; width:98%; background-color: #33aced; padding: 20px; margin-bottom:8px;">	
 	
